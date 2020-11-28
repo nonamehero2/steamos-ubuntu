@@ -153,9 +153,27 @@ if [[ "${INCLUDE_OPENSSH}" == "true" ]]; then
 	apt install openssh-server -y
 fi
 
+# Switch to lightdm
+apt remove gdm3 -y
+apt install lightdm -y
+usermod -a -G nopasswdlogin desktop
+usermod -a -G nopasswdlogin steam
+dpkg-reconfigure lightdm
+
+
 # Enable automatic login. We use 'envsubst' to replace the user with ${STEAM_USER}.
+#echo "Enabling automatic login..."
+#envsubst < ./conf/custom.conf > /etc/gdm3/custom.conf
 echo "Enabling automatic login..."
-envsubst < ./conf/custom.conf > /etc/gdm3/custom.conf
+echo '[SeatDefaults]' > /etc/lightdm/lightdm.conf
+echo 'autologin-user=steam' >> /etc/lightdm/lightdm.conf
+
+echo '[InputSource0]' > /var/lib/AccountsService/users/steam
+echo 'xkb=ca' >> /var/lib/AccountsService/users/steam
+echo ' ' >> /var/lib/AccountsService/users/steam
+echo '[User]' >> /var/lib/AccountsService/users/steam
+echo 'XSession=steamos' >> /var/lib/AccountsService/users/steam
+echo 'SystemAccount=false' >> /var/lib/AccountsService/users/steam
 
 # Create our session switching scripts to allow rebooting to the desktop
 echo "Creating reboot to session scripts..."
@@ -192,3 +210,7 @@ echo ""
 echo "Installation complete! Press ENTER to reboot or CTRL+C to exit"
 read -r
 reboot
+
+# Set desktop background
+gsettings set org.gnome.desktop.background picture-uri "file:////usr/share/plymouth/themes/steamos/steam.png"
+
