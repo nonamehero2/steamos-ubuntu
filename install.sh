@@ -157,7 +157,7 @@ fi
 apt remove gdm3 -y
 apt install lightdm -y
 usermod -a -G nopasswdlogin desktop
-usermod -a -G nopasswdlogin steam
+usermod -a -G nopasswdlogin ${STEAM_USER}
 dpkg-reconfigure lightdm
 
 
@@ -205,6 +205,9 @@ update-grub
 # Set the X session to use the installed steamos session
 echo "Configuring the default session..."
 cp ./conf/steam-session.conf "/var/lib/AccountsService/users/${STEAM_USER}"
+
+wget https://raw.githubusercontent.com/gamer-os/steamos-compositor/master/steamos-install.sh
+sudo bash steamos-install.sh
 
 echo ""
 echo "Installation complete! Press ENTER to reboot or CTRL+C to exit"
