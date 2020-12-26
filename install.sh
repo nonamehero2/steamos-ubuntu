@@ -154,12 +154,11 @@ if [[ "${INCLUDE_OPENSSH}" == "true" ]]; then
 fi
 
 # Switch to lightdm
-apt remove gdm3 -y
+apt remove gdm3 -y --allow-remove-essential
 apt install lightdm -y
 usermod -a -G nopasswdlogin desktop
 usermod -a -G nopasswdlogin ${STEAM_USER}
 dpkg-reconfigure lightdm
-
 
 # Enable automatic login. We use 'envsubst' to replace the user with ${STEAM_USER}.
 #echo "Enabling automatic login..."
