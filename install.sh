@@ -263,3 +263,5 @@ reboot
 # Set desktop background
 gsettings set org.gnome.desktop.background picture-uri "file:////usr/share/plymouth/themes/steamos/steam.png"
 
+# adds a while loop that restarts steam unless it closes itself
+cat ./conf/steam-crash-fix.sh >> /usr/bin/steamos-session
