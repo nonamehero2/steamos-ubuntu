@@ -2,15 +2,14 @@
 
 # Set the defaults. These can be overridden by specifying the value as an
 # environment variable when running this script.
-INCLUDE_OPENSSH="${INCLUDE_OPENSSH:-true}"
-INCLUDE_SAKURA="${INCLUDE_SAKURA:-false}"
-INCLUDE_PROTONFIX="${INCLUDE_PROTONFIX:-true}"
-INCLUDE_GPU_DRIVERS="${INCLUDE_GPU_DRIVERS:-false}"
-GPU_TYPE="${GPU_TYPE:-auto}"
-NON_INTERACTIVE="${NON_INTERACTIVE:-false}"
-STEAM_USER="${STEAM_USER:-steam}"
-export STEAM_USER=${STEAM_USER}
-ATTEMPT_LIGHTDM="${ATTEMPT_LIGHTDM:-false}"
+INCLUDE_OPENSSH="true"
+INCLUDE_SAKURA="false"
+INCLUDE_PROTONFIX="true"
+INCLUDE_GPU_DRIVERS="false"
+GPU_TYPE="auto"
+NON_INTERACTIVE="false"
+STEAM_USER="steam"
+ATTEMPT_LIGHTDM="false"
 
 # Configure the default versions of the SteamOS packages to use. These generally
 # don't ever need to be overridden.
@@ -24,16 +23,56 @@ if [ "$EUID" -ne 0 ]; then
 	exit
 fi
 
+# Parse commandline
+for i in "$@"
+do
+case $i in
+    -o=*|--openssh=*)
+    INCLUDE_OPENSSH="${i#*=}"
+    shift # past argument=value
+    ;;
+    -t=*|--terminal=*)
+    INCLUDE_SAKURA="${i#*=}"
+    shift # past argument=value
+    ;;
+	-p=*|--protonfix=*)
+    INCLUDE_PROTONFIX="${i#*=}"
+    shift # past argument=value
+    ;;
+	-gd=*|--gpudrivers=*)
+    INCLUDE_GPU_DRIVERS="${i#*=}"
+    shift # past argument=value
+    ;;
+	-gt=*|--gputype=*)
+    GPU_TYPE="${i#*=}"
+    shift # past argument=value
+    ;;
+	-u=*|--steamuser=*)
+    STEAM_USER="${i#*=}"
+    shift # past argument=value
+    ;;
+	-l=*|--attemptlightdm=*)
+    ATTEMPT_LIGHTDM="${i#*=}"
+    shift # past argument=value
+    ;;
+    *)
+          # unknown option
+    ;;
+esac
+done
+
+export STEAM_USER=${STEAM_USER}
+
 # Confirm from the user that it's OK to continue
 if [[ "${NON_INTERACTIVE}" != "true" ]]; then
 	echo "Options:"
-	echo "  OpenSSH:      ${INCLUDE_OPENSSH}"
-	echo "  Terminal:     ${INCLUDE_SAKURA}"
-	echo "  Proton Fixes: ${INCLUDE_PROTONFIX}"
-	echo "  GPU Drivers:  ${INCLUDE_GPU_DRIVERS}"
-	echo "    GPU Type:   ${GPU_TYPE}"
-	echo "  Steam User:   ${STEAM_USER}"
-	echo "  Attempt Lightdm:   ${ATTEMPT_LIGHTDM}"
+	echo "          OpenSSH: ${INCLUDE_OPENSSH}"
+	echo "         Terminal: ${INCLUDE_SAKURA}"
+	echo "     Proton Fixes: ${INCLUDE_PROTONFIX}"
+	echo "      GPU Drivers: ${INCLUDE_GPU_DRIVERS}"
+	echo "         GPU Type: ${GPU_TYPE}"
+	echo "       Steam User: ${STEAM_USER}"
+	echo "  Attempt Lightdm: ${ATTEMPT_LIGHTDM}"
 	echo ""
 	echo "This script will configure a SteamOS-like experience on Ubuntu."
 	read -p "Do you want to continue? [Yy] " -n 1 -r
