@@ -201,6 +201,8 @@ fi
 if [[ "${ATTEMPT_LIGHTDM}" == "true" ]]; then
 	apt remove gdm3 -y --allow-remove-essential
 	apt install lightdm -y
+	apt install gnome-session -y
+	adduser --disabled-password --gecos "" "desktop"
 	usermod -a -G nopasswdlogin desktop
 	usermod -a -G nopasswdlogin ${STEAM_USER}
 	dpkg-reconfigure lightdm
