@@ -2,14 +2,15 @@
 
 # Set the defaults. These can be overridden by specifying the value as an
 # environment variable when running this script.
-export INCLUDE_OPENSSH="${INCLUDE_OPENSSH:=true}"
-export INCLUDE_SAKURA="${INCLUDE_SAKURA:=false}"
-export INCLUDE_PROTONFIX="${INCLUDE_PROTONFIX:=true}"
-export INCLUDE_GPU_DRIVERS="${INCLUDE_GPU_DRIVERS:=false}"
-export GPU_TYPE="${GPU_TYPE:=auto}"
-export NON_INTERACTIVE="${NON_INTERACTIVE:=false}"
-export STEAM_USER="${STEAM_USER:=steam}"
-export ATTEMPT_LIGHTDM="${ATTEMPT_LIGHTDM:=false}"
+INCLUDE_OPENSSH="${INCLUDE_OPENSSH:=true}"
+INCLUDE_SAKURA="${INCLUDE_SAKURA:=false}"
+INCLUDE_PROTONFIX="${INCLUDE_PROTONFIX:=true}"
+INCLUDE_GPU_DRIVERS="${INCLUDE_GPU_DRIVERS:=false}"
+GPU_TYPE="${GPU_TYPE:=auto}"
+NON_INTERACTIVE="${NON_INTERACTIVE:=false}"
+STEAM_USER="${STEAM_USER:=steam}"
+export STEAM_USER=${STEAM_USER}
+ATTEMPT_LIGHTDM="${ATTEMPT_LIGHTDM:=false}"
 
 # Configure the default versions of the SteamOS packages to use. These generally
 # don't ever need to be overridden.
