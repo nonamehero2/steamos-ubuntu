@@ -255,13 +255,13 @@ cp ./conf/steam-session.conf "/var/lib/AccountsService/users/${STEAM_USER}"
 wget https://raw.githubusercontent.com/gamer-os/steamos-compositor/master/steamos-install.sh
 sudo bash steamos-install.sh
 
-echo ""
-echo "Installation complete! Press ENTER to reboot or CTRL+C to exit"
-read -r
-reboot
+# adds a while loop that restarts steam unless it closes itself
+cat ./conf/steam-crash-fix.sh >> /usr/bin/steamos-session
 
 # Set desktop background
 gsettings set org.gnome.desktop.background picture-uri "file:////usr/share/plymouth/themes/steamos/steam.png"
 
-# adds a while loop that restarts steam unless it closes itself
-cat ./conf/steam-crash-fix.sh >> /usr/bin/steamos-session
+echo ""
+echo "Installation complete! Press ENTER to reboot or CTRL+C to exit"
+read -r
+reboot
