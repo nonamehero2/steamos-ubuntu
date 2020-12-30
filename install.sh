@@ -8,7 +8,7 @@ export INCLUDE_PROTONFIX="${INCLUDE_PROTONFIX:-true}"
 export INCLUDE_GPU_DRIVERS="${INCLUDE_GPU_DRIVERS:-false}"
 export GPU_TYPE="${GPU_TYPE:-auto}"
 export NON_INTERACTIVE="${NON_INTERACTIVE:-false}"
-export STEAM_USER="${STEAM_USER:-steam}"
+export STEAM_USER="${STEAM_USER:-$USER}"
 export ATTEMPT_LIGHTDM="${ATTEMPT_LIGHTDM:-false}"
 
 # Configure the default versions of the SteamOS packages to use. These generally
