@@ -2,21 +2,21 @@
 
 # Set the defaults. These can be overridden by specifying the value as an
 # environment variable when running this script.
-INCLUDE_OPENSSH="${INCLUDE_OPENSSH:=true}"
-INCLUDE_SAKURA="${INCLUDE_SAKURA:=false}"
-INCLUDE_PROTONFIX="${INCLUDE_PROTONFIX:=true}"
-INCLUDE_GPU_DRIVERS="${INCLUDE_GPU_DRIVERS:=false}"
-GPU_TYPE="${GPU_TYPE:=auto}"
-NON_INTERACTIVE="${NON_INTERACTIVE:=false}"
-STEAM_USER="${STEAM_USER:=steam}"
+INCLUDE_OPENSSH="${INCLUDE_OPENSSH:-true}"
+INCLUDE_SAKURA="${INCLUDE_SAKURA:-false}"
+INCLUDE_PROTONFIX="${INCLUDE_PROTONFIX:-true}"
+INCLUDE_GPU_DRIVERS="${INCLUDE_GPU_DRIVERS:-false}"
+GPU_TYPE="${GPU_TYPE:-auto}"
+NON_INTERACTIVE="${NON_INTERACTIVE:-false}"
+STEAM_USER="${STEAM_USER:-steam}"
 export STEAM_USER=${STEAM_USER}
-ATTEMPT_LIGHTDM="${ATTEMPT_LIGHTDM:=false}"
+ATTEMPT_LIGHTDM="${ATTEMPT_LIGHTDM:-false}"
 
 # Configure the default versions of the SteamOS packages to use. These generally
 # don't ever need to be overridden.
-STEAMOS_COMPOSITOR_VER="${STEAMOS_COMPOSITOR_VER:=1.35+bsos1_amd64}"
-STEAMOS_MODESWITCH_VER="${STEAMOS_MODESWITCH_VER:=1.10+bsos1_amd64}"
-STEAMOS_PLYMOUTH_VER="${STEAMOS_PLYMOUTH_VER:=0.17+bsos2_all}"
+STEAMOS_COMPOSITOR_VER="${STEAMOS_COMPOSITOR_VER:-1.35+bsos1_amd64}"
+STEAMOS_MODESWITCH_VER="${STEAMOS_MODESWITCH_VER:-1.10+bsos1_amd64}"
+STEAMOS_PLYMOUTH_VER="${STEAMOS_PLYMOUTH_VER:-0.17+bsos2_all}"
 
 # Ensure the script is being run as root
 if [ "$EUID" -ne 0 ]; then
