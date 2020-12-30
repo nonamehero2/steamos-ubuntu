@@ -32,6 +32,7 @@ if [[ "${NON_INTERACTIVE}" != "true" ]]; then
 	echo "  GPU Drivers:  ${INCLUDE_GPU_DRIVERS}"
 	echo "    GPU Type:   ${GPU_TYPE}"
 	echo "  Steam User:   ${STEAM_USER}"
+	echo "  Attempt Lightdm:   ${ATTEMPT_LIGHTDM}"
 	echo ""
 	echo "This script will configure a SteamOS-like experience on Ubuntu."
 	read -p "Do you want to continue? [Yy] " -n 1 -r
