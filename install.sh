@@ -204,21 +204,22 @@ if [[ "${ATTEMPT_LIGHTDM}" == "true" ]]; then
 	usermod -a -G nopasswdlogin desktop
 	usermod -a -G nopasswdlogin ${STEAM_USER}
 	dpkg-reconfigure lightdm
+
+	echo "Enabling automatic login..."
+	echo '[SeatDefaults]' > /etc/lightdm/lightdm.conf
+	echo 'autologin-user=${STEAM_USER}' >> /etc/lightdm/lightdm.conf
+
+	echo '[InputSource0]' > /var/lib/AccountsService/users/steam
+	echo 'xkb=ca' >> /var/lib/AccountsService/users/steam
+	echo ' ' >> /var/lib/AccountsService/users/steam
+	echo '[User]' >> /var/lib/AccountsService/users/steam
+	echo 'XSession=steamos' >> /var/lib/AccountsService/users/steam
+	echo 'SystemAccount=false' >> /var/lib/AccountsService/users/steam
 fi
 
 # Enable automatic login. We use 'envsubst' to replace the user with ${STEAM_USER}.
-#echo "Enabling automatic login..."
-#envsubst < ./conf/custom.conf > /etc/gdm3/custom.conf
 echo "Enabling automatic login..."
-echo '[SeatDefaults]' > /etc/lightdm/lightdm.conf
-echo 'autologin-user=${STEAM_USER}' >> /etc/lightdm/lightdm.conf
-
-echo '[InputSource0]' > /var/lib/AccountsService/users/steam
-echo 'xkb=ca' >> /var/lib/AccountsService/users/steam
-echo ' ' >> /var/lib/AccountsService/users/steam
-echo '[User]' >> /var/lib/AccountsService/users/steam
-echo 'XSession=steamos' >> /var/lib/AccountsService/users/steam
-echo 'SystemAccount=false' >> /var/lib/AccountsService/users/steam
+envsubst < ./conf/custom.conf > /etc/gdm3/custom.conf
 
 # Create our session switching scripts to allow rebooting to the desktop
 echo "Creating reboot to session scripts..."
