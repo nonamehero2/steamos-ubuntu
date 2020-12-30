@@ -211,7 +211,7 @@ fi
 #envsubst < ./conf/custom.conf > /etc/gdm3/custom.conf
 echo "Enabling automatic login..."
 echo '[SeatDefaults]' > /etc/lightdm/lightdm.conf
-echo 'autologin-user=steam' >> /etc/lightdm/lightdm.conf
+echo 'autologin-user=${STEAM_USER}' >> /etc/lightdm/lightdm.conf
 
 echo '[InputSource0]' > /var/lib/AccountsService/users/steam
 echo 'xkb=ca' >> /var/lib/AccountsService/users/steam
