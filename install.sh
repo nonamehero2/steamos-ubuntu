@@ -2,14 +2,14 @@
 
 # Set the defaults. These can be overridden by specifying the value as an
 # environment variable when running this script.
-INCLUDE_OPENSSH="${INCLUDE_OPENSSH:-true}"
-INCLUDE_SAKURA="${INCLUDE_SAKURA:-true}"
-INCLUDE_PROTONFIX="${INCLUDE_PROTONFIX:-false}"
-INCLUDE_GPU_DRIVERS="${INCLUDE_GPU_DRIVERS:-true}"
-GPU_TYPE="${GPU_TYPE:-auto}"
-NON_INTERACTIVE="${NON_INTERACTIVE:-false}"
-STEAM_USER="${STEAM_USER:-steam}"
-export STEAM_USER
+export INCLUDE_OPENSSH="${INCLUDE_OPENSSH:-true}"
+export INCLUDE_SAKURA="${INCLUDE_SAKURA:-false}"
+export INCLUDE_PROTONFIX="${INCLUDE_PROTONFIX:-true}"
+export INCLUDE_GPU_DRIVERS="${INCLUDE_GPU_DRIVERS:-false}"
+export GPU_TYPE="${GPU_TYPE:-auto}"
+export NON_INTERACTIVE="${NON_INTERACTIVE:-false}"
+export STEAM_USER="${STEAM_USER:-steam}"
+export ATTEMPT_LIGHTDM="${ATTEMPT_LIGHTDM:-false}"
 
 # Configure the default versions of the SteamOS packages to use. These generally
 # don't ever need to be overridden.
@@ -151,14 +151,19 @@ fi
 if [[ "${INCLUDE_OPENSSH}" == "true" ]]; then
 	echo "Installing OpenSSH Server..."
 	apt install openssh-server -y
+	# Enable sshd for openssh server
+	systemctl enable sshd
 fi
 
 # Switch to lightdm
-apt remove gdm3 -y --allow-remove-essential
-apt install lightdm -y
-usermod -a -G nopasswdlogin desktop
-usermod -a -G nopasswdlogin ${STEAM_USER}
-dpkg-reconfigure lightdm
+# Dont work yet ¯\_(ツ)_/¯
+if [[ "${ATTEMPT_LIGHTDM}" == "true" ]]; then
+	apt remove gdm3 -y --allow-remove-essential
+	apt install lightdm -y
+	usermod -a -G nopasswdlogin desktop
+	usermod -a -G nopasswdlogin ${STEAM_USER}
+	dpkg-reconfigure lightdm
+fi
 
 # Enable automatic login. We use 'envsubst' to replace the user with ${STEAM_USER}.
 #echo "Enabling automatic login..."
