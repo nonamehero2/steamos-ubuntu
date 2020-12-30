@@ -45,7 +45,7 @@ running the install script with the options you want.
 For example, if you want to disable installing OpenSSH and run the script non-
 interactively, you can run this command:
 
-`INCLUDE_OPENSSH=false NON_INTERACTIVE=true sudo ./install.sh`
+`sudo ./install.sh -o=false --i=true`
 
 Here is the list of all the available installation options:
 
