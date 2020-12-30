@@ -47,6 +47,10 @@ case $i in
     GPU_TYPE="${i#*=}"
     shift # past argument=value
     ;;
+	-i=*|--noninteractive=*)
+    STEAM_USER="${i#*=}"
+    shift # past argument=value
+    ;;
 	-u=*|--steamuser=*)
     STEAM_USER="${i#*=}"
     shift # past argument=value

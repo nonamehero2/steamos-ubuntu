@@ -49,15 +49,16 @@ interactively, you can run this command:
 
 Here is the list of all the available installation options:
 
-| Option Name          | Default | Description                                              |
-| -------------------- | ------- | -------------------------------------------------------- |
-| `INCLUDE_OPENSSH`    | true    | Whether or not OpenSSH server should be installed        |
-| `INCLUDE_SAKURA`     | true    | Whether or not to install a terminal emulator            |
-| `INCLUDE_PROTONFIX`  | true    | Whether or not to install Protonfix                      |
-| `INCLUDE_GPU_DRIVERS`| true    | Whether or not to install the latest GPU drivers         |
-| `GPU_TYPE`           | auto    | GPU drivers to install. Can be: auto, nvidia, amd, intel |
-| `NON_INTERACTIVE`    | false   | Whether or not to prompt the user during install         |
-| `STEAM_USER`         | steam   | The username of the account to autologin as              |
+| Option Name          | Commandline           | Default | Description                                              |
+| -------------------- | --------------------- | ------- | -------------------------------------------------------- |
+| `INCLUDE_OPENSSH`    | -o=/--openssh=        | true    | Whether or not OpenSSH server should be installed        |
+| `INCLUDE_SAKURA`     | -t=/--terminal=       | false   | Whether or not to install a terminal emulator            |
+| `INCLUDE_PROTONFIX`  | -p=/--protonfix=      | true    | Whether or not to install Protonfix                      |
+| `INCLUDE_GPU_DRIVERS`| -gd=/--gpudrivers=    | false   | Whether or not to install the latest GPU drivers         |
+| `GPU_TYPE`           | -gt=/--gputype=       | auto    | GPU drivers to install. Can be: auto, nvidia, amd, intel |
+| `NON_INTERACTIVE`    | -i=/--noninteractive= | false   | Whether or not to prompt the user during install         |
+| `STEAM_USER`         | -u=/--steamuser=      | steam   | The username of the account to autologin as              |
+| `ATTEMPT_LIGHTDM`    | -l=/--attemptlightdm= | false   | Attempts to install lightdm (for desktop mode)           |
 
 ## FAQ
 
