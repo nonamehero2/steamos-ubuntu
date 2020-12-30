@@ -102,6 +102,9 @@ STEAM_UID=$(grep "^${STEAM_USER}" /etc/passwd | cut -d':' -f3)
 STEAM_GID=$(grep "^${STEAM_USER}" /etc/passwd | cut -d':' -f4)
 echo "Steam user '${STEAM_USER}' found with UID ${STEAM_UID} and GID ${STEAM_GID}"
 
+# Update os
+apt update && apt upgrade
+
 # Choosing from the guide in Proton (SteamPlay) Wiki https://github.com/ValveSoftware/Proton/wiki/Requirements
 # Install the GPU drivers if it was specified by the user.
 if [[ "${INCLUDE_GPU_DRIVERS}" == "true" ]]; then
